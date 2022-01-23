@@ -1,7 +1,6 @@
 ## docker build 
 ```
-export VEXIM_VERSION=2.3
-docker build --build-arg VEXIM_VERSION -t zetanova/vexim:2.3 -t zetanova/vexim:latest .
+docker build --build-arg VEXIM_VERSION=2.3 --build-arg VEXIM_UID=90 --build-arg VEXIM_UID=90 -t zetanova/vexim:2.3 -t zetanova/vexim:latest .
 docker push zetanova/vexim:2.3 
 docker push zetanova/vexim:latest
 ```

@@ -13,6 +13,8 @@ RUN tar -xzf *.tar.gz -C . \
 
 
 FROM php:7.4-apache
+ARG VEXIM_UID=90
+ARG VEXIM_GID=90
 
 RUN apt-get update && apt-get install -y \
         libc-client-dev libkrb5-dev \
@@ -28,8 +30,11 @@ ENV VEXIM_SQL_SERVER="localhost" \
   VEXIM_SQL_PASS="CHANGE" \
   VEXIM_CRYPTSCHEME="sha512" \
   VEXIM_MAILROOT="/var/vmail/" \
-  VEXIM_UID="90" \
-  VEXIM_GID="90"
+  VEXIM_UID="${VEXIM_UID}" \
+  VEXIM_GID="${VEXIM_GID}"
+
+RUN groupadd -g ${VEXIM_UID} vexim \
+   && useradd -u ${VEXIM_UID} -g vexim vexim
 
 COPY --from=build /app/vexim/vexim/ /var/www/html/
 COPY ./variables.php /var/www/html/config/variables.php
