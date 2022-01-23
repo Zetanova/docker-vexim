@@ -51,8 +51,8 @@
   /* The UID's and GID's control the default UID and GID for new domains
      and if postmasters can define their own.
      THE UID AND GID MUST BE NUMERIC! */
-  $uid = getenv("VEXIM_UID");
-  $gid = getenv("VEXIM_GID");
+  $uid = intval(getenv("VEXIM_UID"));
+  $gid = intval(getenv("VEXIM_GID"));
   $postmasteruidgid = "yes";
 
   /* The location of your mailstore for new domains.
