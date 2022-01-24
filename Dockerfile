@@ -33,7 +33,7 @@ ENV VEXIM_SQL_SERVER="localhost" \
   VEXIM_UID="${VEXIM_UID}" \
   VEXIM_GID="${VEXIM_GID}"
 
-RUN groupadd -g ${VEXIM_UID} vexim \
+RUN groupadd -g ${VEXIM_GID} vexim \
    && useradd -u ${VEXIM_UID} -g vexim vexim
 
 COPY --from=build /app/vexim/vexim/ /var/www/html/
