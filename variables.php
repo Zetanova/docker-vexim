@@ -63,7 +63,7 @@
      Generally, this shouldn't be disabled, but there may be special cases
      when our check doesn't work and should be disabled (e.g. the parent
      directory of mail store is inaccessible to your web server). */
-  $testmailroot = true;
+  $testmailroot = false;
 
   /* path to Mailman */
   $mailmanroot = "http://www.EXAMPLE.com/mailman";

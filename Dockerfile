@@ -13,8 +13,8 @@ RUN tar -xzf *.tar.gz -C . \
 
 
 FROM php:7.4-apache
-ARG VEXIM_UID=90
-ARG VEXIM_GID=90
+ARG VEXIM_UID=1000
+ARG VEXIM_GID=1000
 ARG VEXIM_MAILROOT="/var/vmail/"
 
 RUN apt-get update && apt-get install -y \
@@ -37,7 +37,14 @@ ENV VEXIM_SQL_SERVER="localhost" \
 RUN groupadd -g ${VEXIM_GID} vexim \
    && useradd -u ${VEXIM_UID} -g vexim vexim
 
+# legacy user id
+RUN groupadd -g 99 vexim \
+   && useradd -u 99 -g vexim vexim
+
+RUN mkdir -p /var/vmail/
+
 RUN mkdir -p ${VEXIM_MAILROOT}
 
 COPY --from=build /app/vexim/vexim/ /var/www/html/
 COPY ./variables.php /var/www/html/config/variables.php
+COPY ./userchangepassword.php /var/www/html/userchangepassword.php
